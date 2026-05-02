@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAB – Majelis Taklim Raudhotul Insan</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --hijau-tua: #0d2b1a;
+    --hijau-mid: #1a5c35;
+    --hijau-light: #2e7d52;
+    --emas: #c9a227;
+    --emas-light: #e6c050;
+    --krem: #fdf6e3;
+    --krem-mid: #f5ead0;
+    --teks: #1a1a1a;
+    --teks-mid: #444;
+    --garis: #c9a22733;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--hijau-tua);
+    font-family: 'Lato', sans-serif;
+    color: var(--teks);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 32px 16px 60px;
+  }
+
+  /* Background arabesque pattern */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(201,162,39,0.04) 0, rgba(201,162,39,0.04) 1px, transparent 0, transparent 50%),
+      repeating-linear-gradient(-45deg, rgba(201,162,39,0.04) 0, rgba(201,162,39,0.04) 1px, transparent 0, transparent 50%);
+    background-size: 30px 30px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .kertas {
+    position: relative;
+    z-index: 1;
+    background: var(--krem);
+    width: 100%;
+    max-width: 780px;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,162,39,0.3);
+    animation: fadeUp 0.7s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    background: var(--hijau-tua);
+    padding: 36px 48px 28px;
+    text-align: center;
+    position: relative;
+    border-bottom: 3px solid var(--emas);
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -8px; left: 50%;
+    transform: translateX(-50%);
+    width: 60px; height: 14px;
+    background: var(--emas);
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+  }
+
+  .ornamen-top {
+    font-family: 'Amiri', serif;
+    font-size: 22px;
+    color: var(--emas);
+    letter-spacing: 6px;
+    margin-bottom: 14px;
+    opacity: 0.8;
+  }
+  .judul-utama {
+    font-family: 'Amiri', serif;
+    font-size: 13px;
+    color: var(--emas-light);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .judul-besar {
+    font-family: 'Amiri', serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .judul-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1px;
+  }
+  .badge-ukuran {
+    display: inline-block;
+    margin-top: 14px;
+    background: var(--emas);
+    color: var(--hijau-tua);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    padding: 5px 18px;
+    border-radius: 20px;
+    text-transform: uppercase;
+  }
+
+  /* ===== BODY ===== */
+  .body {
+    padding: 40px 48px;
+  }
+
+  /* ===== INFO STRIPE ===== */
+  .info-stripe {
+    display: flex;
+    gap: 0;
+    margin-bottom: 32px;
+    border: 1px solid var(--garis);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .info-item {
+    flex: 1;
+    padding: 14px 18px;
+    border-right: 1px solid var(--garis);
+    background: var(--krem-mid);
+  }
+  .info-item:last-child { border-right: none; }
+  .info-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--hijau-mid);
+    margin-bottom: 3px;
+  }
+  .info-val {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--teks);
+  }
+
+  /* ===== TABEL ===== */
+  .section-title {
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--hijau-mid);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--emas), transparent);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0;
+  }
+  thead tr {
+    background: var(--hijau-tua);
+  }
+  thead th {
+    padding: 12px 16px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--emas);
+  }
+  thead th:last-child { text-align: right; }
+
+  tbody tr {
+    border-bottom: 1px solid rgba(201,162,39,0.12);
+    transition: background 0.15s;
+  }
+  tbody tr:hover { background: rgba(201,162,39,0.05); }
+
+  td {
+    padding: 11px 16px;
+    font-size: 13.5px;
+    color: var(--teks-mid);
+    vertical-align: middle;
+  }
+  td:first-child { color: var(--teks); }
+  td.angka {
+    text-align: right;
+    font-weight: 700;
+    color: var(--hijau-mid);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.5px;
+  }
+  .no-col { width: 36px; text-align: center; color: #aaa; font-size: 11px; }
+
+  .sub-note {
+    font-size: 11px;
+    color: #888;
+    font-style: italic;
+    display: block;
+    margin-top: 1px;
+  }
+
+  /* Subtotal row */
+  .row-subtotal {
+    background: var(--krem-mid) !important;
+    border-top: 2px solid rgba(201,162,39,0.3) !important;
+    border-bottom: 2px solid rgba(201,162,39,0.3) !important;
+  }
+  .row-subtotal td {
+    font-weight: 700;
+    color: var(--teks) !important;
+    font-size: 13px;
+  }
+  .row-subtotal td.angka { color: var(--hijau-mid) !important; font-size: 14px; }
+
+  /* Contingency row */
+  .row-cont td {
+    color: #888 !important;
+    font-size: 12.5px;
+    font-style: italic;
+  }
+  .row-cont td.angka { color: #999 !important; }
+
+  /* Total row */
+  .row-total {
+    background: var(--hijau-tua) !important;
+  }
+  .row-total td {
+    color: #fff !important;
+    font-weight: 900;
+    font-size: 15px;
+    padding: 16px;
+  }
+  .row-total td.angka {
+    color: var(--emas-light) !important;
+    font-size: 17px;
+    letter-spacing: 1px;
+  }
+
+  /* ===== TERBILANG ===== */
+  .terbilang-box {
+    margin-top: 24px;
+    padding: 16px 20px;
+    border-left: 4px solid var(--emas);
+    background: var(--krem-mid);
+    border-radius: 0 2px 2px 0;
+  }
+  .terbilang-label {
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--hijau-mid);
+    margin-bottom: 4px;
+  }
+  .terbilang-text {
+    font-family: 'Amiri', serif;
+    font-size: 16px;
+    color: var(--teks);
+    line-height: 1.5;
+  }
+
+  /* ===== CATATAN ===== */
+  .catatan {
+    margin-top: 32px;
+    padding: 20px 24px;
+    border: 1px solid var(--garis);
+    background: rgba(255,255,255,0.5);
+    border-radius: 2px;
+  }
+  .catatan-title {
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--hijau-mid);
+    margin-bottom: 12px;
+  }
+  .catatan ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .catatan li {
+    font-size: 12.5px;
+    color: var(--teks-mid);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .catatan li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--emas);
+    font-size: 8px;
+    top: 3px;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--hijau-tua);
+    padding: 24px 48px;
+    text-align: center;
+    border-top: 3px solid var(--emas);
+  }
+  .footer-nama {
+    font-family: 'Amiri', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 5px;
+  }
+  .footer-detail {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+  }
+  .footer-ornamen {
+    margin-top: 14px;
+    font-family: 'Amiri', serif;
+    font-size: 20px;
+    color: var(--emas);
+    opacity: 0.6;
+    letter-spacing: 8px;
+  }
+
+  /* Print */
+  @media print {
+    body { background: white; padding: 0; }
+    body::before { display: none; }
+    .kertas { box-shadow: none; }
+    .print-btn { display: none; }
+  }
+
+  /* Print button */
+  .print-btn {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    background: var(--emas);
+    color: var(--hijau-tua);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    transition: all 0.2s;
+  }
+  .print-btn:hover { background: var(--emas-light); transform: translateY(-2px); }
+
+  @media (max-width: 600px) {
+    .body { padding: 28px 20px; }
+    .header { padding: 28px 20px 22px; }
+    .footer { padding: 20px; }
+    .info-stripe { flex-direction: column; }
+    .info-item { border-right: none; border-bottom: 1px solid var(--garis); }
+    .judul-besar { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="kertas">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="ornamen-top">✦ ✦ ✦</div>
+    <div class="judul-utama">Transparansi Dana — Dokumen Resmi</div>
+    <div class="judul-besar">Rencana Anggaran<br>Biaya</div>
+    <div class="judul-sub">Pembangunan Gedung Majelis Taklim Raudhotul Insan</div>
+    <div class="badge-ukuran">Ukuran 5 × 8 Meter · Luas 40 m²</div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- INFO STRIPE -->
+    <div class="info-stripe">
+      <div class="info-item">
+        <div class="info-label">Lokasi</div>
+        <div class="info-val">Kp. Pasir Ipis, Gunungguruh</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Konstruksi</div>
+        <div class="info-val">Permanen</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Luas Bangunan</div>
+        <div class="info-val">40 m²</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Harga Acuan</div>
+        <div class="info-val">Kab. Sukabumi 2024</div>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="section-title">Rincian Biaya Konstruksi</div>
+
+    <table>
+      <thead>
+        <tr>
+          <th class="no-col">No</th>
+          <th style="text-align:left">Uraian Pekerjaan</th>
+          <th>Jumlah (Rp)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="no-col">1</td>
+          <td>Pekerjaan Persiapan</td>
+          <td class="angka">4.175.000</td>
+        </tr>
+        <tr>
+          <td class="no-col">2</td>
+          <td>
+            Pekerjaan Pondasi Batu Kali + Sloof
+          </td>
+          <td class="angka">16.945.000</td>
+        </tr>
+        <tr>
+          <td class="no-col">3</td>
+          <td>
+            Pekerjaan Struktur Beton
+            <span class="sub-note">Kolom, Ring Balok, Lantai Rabat</span>
+          </td>
+          <td class="angka">21.920.000</td>
+        </tr>
+        <tr>
+          <td class="no-col">4</td>
+          <td>Pekerjaan Dinding &amp; Plesteran</td>
+          <td class="angka">26.000.000</td>
+        </tr>
+        <tr>
+          <td class="no-col">5</td>
+          <td>
+            Pekerjaan Atap
+            <span class="sub-note">Kuda-kuda + Genteng Keramik</span>
+          </td>
+          <td class="angka">19.645.000</td>
+        </tr>
+        <tr>
+          <td class="no-col">6</td>
+          <td>Pekerjaan Lantai Keramik 40×40 cm</td>
+          <td class="angka">7.210.000</td>
+        </tr>
+        <tr>
+          <td class="no-col">7</td>
+          <td>Pekerjaan Kusen, Pintu &amp; Jendela</td>
+          <td class="angka">11.700.000</td>
+        </tr>
+        <tr>
+          <td class="no-col">8</td>
+          <td>Pekerjaan Plafon GRC / Gypsum</td>
+          <td class="angka">7.025.000</td>
+        </tr>
+        <tr>
+          <td class="no-col">9</td>
+          <td>Instalasi Listrik (8 Titik Lampu)</td>
+          <td class="angka">3.565.000</td>
+        </tr>
+        <tr>
+          <td class="no-col">10</td>
+          <td>Sanitasi &amp; Drainase</td>
+          <td class="angka">4.400.000</td>
+        </tr>
+        <tr>
+          <td class="no-col">11</td>
+          <td>Finishing &amp; Cat</td>
+          <td class="angka">8.885.000</td>
+        </tr>
+
+        <!-- SUBTOTAL -->
+        <tr class="row-subtotal">
+          <td class="no-col" style="color:#aaa">—</td>
+          <td style="font-weight:800">Subtotal Biaya Konstruksi</td>
+          <td class="angka">131.470.000</td>
+        </tr>
+
+        <!-- CONTINGENCY -->
+        <tr class="row-cont">
+          <td class="no-col"></td>
+          <td>Biaya Tak Terduga / Contingency (10%)</td>
+          <td class="angka">13.145.000</td>
+        </tr>
+
+        <!-- TOTAL -->
+        <tr class="row-total">
+          <td class="no-col" style="color:rgba(255,255,255,0.3)">✦</td>
+          <td>Total Kebutuhan Dana</td>
+          <td class="angka">Rp 144.615.000</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- TERBILANG -->
+    <div class="terbilang-box">
+      <div class="terbilang-label">Terbilang</div>
+      <div class="terbilang-text">Seratus Empat Puluh Empat Juta Enam Ratus Lima Belas Ribu Rupiah</div>
+    </div>
+
+    <!-- CATATAN -->
+    <div class="catatan">
+      <div class="catatan-title">Catatan</div>
+      <ul>
+        <li>RAB berdasarkan harga material &amp; upah Kab. Sukabumi 2024</li>
+        <li>Ukuran bangunan 5 × 8 meter = 40 m², konstruksi permanen</li>
+        <li>Harga dapat berubah menyesuaikan kondisi pasar saat pelaksanaan</li>
+        <li>Seluruh penggunaan dana dicatat &amp; dilaporkan transparan kepada donatur</li>
+        <li>Lahan pembangunan merupakan tanah wakaf — bebas sengketa</li>
+      </ul>
+    </div>
+
+  </div><!-- /body -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-nama">Majelis Taklim Raudhotul Insan</div>
+    <div class="footer-detail">
+      Kp. Pasir Ipis RT 39/08, Desa Gunungguruh, Kec. Gunungguruh, Kab. Sukabumi<br>
+      SK Kemenag No. 976 Tahun 2020 &nbsp;|&nbsp; No. Statistik: 431.2.32.02.10722
+    </div>
+    <div class="footer-ornamen">— ✦ —</div>
+  </div>
+
+</div><!-- /kertas -->
+
+<button class="print-btn" onclick="window.print()">⎙ &nbsp;Cetak / Simpan PDF</button>
+
+</body>
+</html>
